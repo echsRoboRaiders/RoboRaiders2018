@@ -1,0 +1,5 @@
+Robot Information Updates:
+
+1. How many CIMS (drive motors) are on the robot? 3CIM Gearbox? 2CIM Gearbox?
+
+2. What is the numbering of the talon configuration? (Which talon controls which motor?)
