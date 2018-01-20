@@ -16,3 +16,12 @@ Robot Information Updates:
 
 wants to know if bot can have vision sensor to detect red or blue locations at begining of match 
 
+
+2 moters on left and right
+
+pwm 0 left moter 2 drive moters blue/yellow
+
+pwm1 right two moters purple/green
+
+
+
