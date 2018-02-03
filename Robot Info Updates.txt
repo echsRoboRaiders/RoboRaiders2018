@@ -34,4 +34,10 @@ ________________________________________________________________________________
 Week4 Updates:
 
 1. What are the numbering configurations for wiring on the 3 neumatic cylinders?
+
+| #4 is right motion side of cylender , #5 is the fixed end of the right cylender.|
+| #6 is the left motion side cylender, #7 fixed end left cylender.|
+
 2. What are the numbering configurations for wiring on the 2 neumatic solinoids?
+
+| #4 goes to #4 on the PCM, #5 goes to #5 on the PCM, 6 to 6 on pcm , 7 to 7 on pcm
