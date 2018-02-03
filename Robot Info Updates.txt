@@ -23,6 +23,13 @@ pwm 0 left moter 2 drive moters blue/yellow
 
 pwm1 right two moters purple/green
 
+|2/2/18 update|
+| Left 2 motors got to same left gearbox  right 2 motors goto same right gearbox |
+| signal from rio controling left two motors goes to pwm #0
+| signal from rio controlling right two motors goes to pwm #1
+
+ON SPLITTER
+
 _____________________________________________________________________________________
 Week4 Updates:
 
