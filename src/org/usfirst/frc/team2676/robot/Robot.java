@@ -23,6 +23,8 @@ public class Robot extends IterativeRobot {
 	private static final String kCustomAuto = "My Auto";
 	private String m_autoSelected;
 	private SendableChooser<String> m_chooser = new SendableChooser<>();
+	Drive drive;
+	Controls controls;
 
 	/**
 	 * This function is run when the robot is first started up and should be
@@ -33,6 +35,8 @@ public class Robot extends IterativeRobot {
 		m_chooser.addDefault("Default Auto", kDefaultAuto);
 		m_chooser.addObject("My Auto", kCustomAuto);
 		SmartDashboard.putData("Auto choices", m_chooser);
+        drive = new Drive();
+        controls = new Controls();
 	}
 
 	/**
@@ -57,6 +61,7 @@ public class Robot extends IterativeRobot {
 	/**
 	 * This function is called periodically during autonomous.
 	 */
+	
 	@Override
 	public void autonomousPeriodic() {
 		switch (m_autoSelected) {
@@ -75,6 +80,7 @@ public class Robot extends IterativeRobot {
 	 */
 	@Override
 	public void teleopPeriodic() {
+		drive.drive(controls.getDrivePowerL(), controls.getDrivePowerR());
 	}
 
 	/**
