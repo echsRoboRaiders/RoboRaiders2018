@@ -8,6 +8,8 @@
 package org.usfirst.frc.team2676.robot;
 
 import edu.wpi.first.wpilibj.IterativeRobot;
+import edu.wpi.first.wpilibj.command.Command;
+import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
@@ -19,10 +21,10 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
  * project.
  */
 public class Robot extends IterativeRobot {
-	private static final String kDefaultAuto = "Default";
-	private static final String kCustomAuto = "My Auto";
-	private String m_autoSelected;
-	private SendableChooser<String> m_chooser = new SendableChooser<>();
+	Command autoCommand;
+	SendableChooser autoChooser;
+	String autoSelected;
+	
 	Drive drive;
 	Controls controls;
 
@@ -32,9 +34,12 @@ public class Robot extends IterativeRobot {
 	 */
 	@Override
 	public void robotInit() {
-		m_chooser.addDefault("Default Auto", kDefaultAuto);
-		m_chooser.addObject("My Auto", kCustomAuto);
-		SmartDashboard.putData("Auto choices", m_chooser);
+		autoChooser = new SendableChooser();
+		autoChooser.addDefault("Default Routine" , AutoRoutines.DoNothing);
+		autoChooser.addObject("Drive Straight", AutoRoutines.DriveForward);
+		autoChooser.addObject("Do Nothing", AutoRoutines.DoNothing);
+		SmartDashboard.putData("Auto Mode Chooser", autoChooser);
+		
         drive = new Drive();
         controls = new Controls();
 	}
@@ -52,40 +57,20 @@ public class Robot extends IterativeRobot {
 	 */
 	@Override
 	public void autonomousInit() {
-		m_autoSelected = m_chooser.getSelected();
-		// autoSelected = SmartDashboard.getString("Auto Selector",
-		// defaultAuto);
-		System.out.println("Auto selected: " + m_autoSelected);
+		autoCommand = (Command) autoChooser.getSelected();
+		autoCommand.start();
 	}
-
-	/**
-	 * This function is called periodically during autonomous.
-	 */
 	
 	@Override
 	public void autonomousPeriodic() {
-		switch (m_autoSelected) {
-			case kCustomAuto:
-				// Put custom auto code here
-				break;
-			case kDefaultAuto:
-			default:
-				// Put default auto code here
-				break;
-		}
+		Scheduler.getInstance().run();
 	}
 
-	/**
-	 * This function is called periodically during operator control.
-	 */
 	@Override
 	public void teleopPeriodic() {
 		drive.drive(controls.getDrivePowerL(), controls.getDrivePowerR());
 	}
 
-	/**
-	 * This function is called periodically during test mode.
-	 */
 	@Override
 	public void testPeriodic() {
 	}
