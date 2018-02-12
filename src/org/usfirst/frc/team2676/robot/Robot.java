@@ -19,10 +19,8 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
  * project.
  */
 public class Robot extends IterativeRobot {
-	private static final String kDefaultAuto = "Default";
-	private static final String kCustomAuto = "My Auto";
-	private String m_autoSelected;
-	private SendableChooser<String> m_chooser = new SendableChooser<>();
+	private AutoRoutines autoSelected;
+	private SendableChooser<AutoRoutines> autoChooser = new SendableChooser<>();
 	Drive drive;
 	Controls controls;
 
@@ -32,9 +30,11 @@ public class Robot extends IterativeRobot {
 	 */
 	@Override
 	public void robotInit() {
-		m_chooser.addDefault("Default Auto", kDefaultAuto);
-		m_chooser.addObject("My Auto", kCustomAuto);
-		SmartDashboard.putData("Auto choices", m_chooser);
+		autoChooser.addDefault(AutoRoutines.DriveForward.toString(), AutoRoutines.DriveForward);
+		autoChooser.addObject(AutoRoutines.DriveForward.toString(), AutoRoutines.DriveForward);
+		autoChooser.addObject(AutoRoutines.PowerCubeSwitch.toString(), AutoRoutines.PowerCubeSwitch);
+		autoChooser.addObject(AutoRoutines.DoNothing.toString(), AutoRoutines.DoNothing);
+		SmartDashboard.putData("Autonomous Choices", autoChooser);
         drive = new Drive();
         controls = new Controls();
 	}
@@ -52,10 +52,9 @@ public class Robot extends IterativeRobot {
 	 */
 	@Override
 	public void autonomousInit() {
-		m_autoSelected = m_chooser.getSelected();
-		// autoSelected = SmartDashboard.getString("Auto Selector",
-		// defaultAuto);
-		System.out.println("Auto selected: " + m_autoSelected);
+		autoSelected = autoChooser.getSelected();
+		 //autoSelected = SmartDashboard.getString("Auto Selector", AutoRoutines.DriveForward);
+		System.out.println("Auto selected: " + autoSelected);
 	}
 
 	/**
@@ -64,11 +63,10 @@ public class Robot extends IterativeRobot {
 	
 	@Override
 	public void autonomousPeriodic() {
-		switch (m_autoSelected) {
-			case kCustomAuto:
+		switch (autoSelected) {
+			case DriveForward:
 				// Put custom auto code here
 				break;
-			case kDefaultAuto:
 			default:
 				// Put default auto code here
 				break;
