@@ -21,8 +21,10 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 public class Robot extends IterativeRobot {
 	private AutoRoutines autoSelected;
 	private SendableChooser<AutoRoutines> autoChooser = new SendableChooser<>();
+	public static long startTime;
 	Drive drive;
 	Controls controls;
+	AutoTest test;
 
 	/**
 	 * This function is run when the robot is first started up and should be
@@ -55,6 +57,7 @@ public class Robot extends IterativeRobot {
 		autoSelected = autoChooser.getSelected();
 		 //autoSelected = SmartDashboard.getString("Auto Selector", AutoRoutines.DriveForward);
 		System.out.println("Auto selected: " + autoSelected);
+		startTime = System.currentTimeMillis();
 	}
 
 	/**
@@ -63,6 +66,7 @@ public class Robot extends IterativeRobot {
 	
 	@Override
 	public void autonomousPeriodic() {
+		/*
 		switch (autoSelected) {
 			case DriveForward:
 				// Put custom auto code here
@@ -71,6 +75,8 @@ public class Robot extends IterativeRobot {
 				// Put default auto code here
 				break;
 		}
+		*/
+		test = new AutoTest();
 	}
 
 	/**
