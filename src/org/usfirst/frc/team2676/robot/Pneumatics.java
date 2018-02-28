@@ -14,8 +14,10 @@ public class Pneumatics extends IterativeRobot{
           Compressor airCompressor = new Compressor();  //Digtial I/O,Relay
           airCompressor.start();                        // Start the air compressor
 
-          s1 = new Solenoid(1);                        // Solenoid port
-          s2 = new Solenoid(2);
+          s1 = new Solenoid(RobotMap.RightMotionSolenoid);                        // Solenoid port
+          s2 = new Solenoid(RobotMap.RightFixedSolenoid);
+          //s3 = new Solenoid(RobotMap.LeftFixedSolenoid);
+          //s4 = new Solenoid(RobotMap.LeftMotionSolenoid);
      	}
      
      public void operatorControl() {
