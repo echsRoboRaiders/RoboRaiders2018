@@ -25,6 +25,7 @@ public class Robot extends IterativeRobot {
 	private SendableChooser<String> m_chooser = new SendableChooser<>();
 	Drive drive;
 	Controls controls;
+    Pneumatics airSystem;
 
 	/**
 	 * This function is run when the robot is first started up and should be
@@ -37,6 +38,7 @@ public class Robot extends IterativeRobot {
 		SmartDashboard.putData("Auto choices", m_chooser);
         drive = new Drive();
         controls = new Controls();
+		airSystem = new Pneumatics();
 	}
 
 	/**
