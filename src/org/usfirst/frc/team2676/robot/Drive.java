@@ -1,6 +1,7 @@
 package org.usfirst.frc.team2676.robot;
 
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
+
 public class Drive {
 	public WPI_TalonSRX LeftM, LeftS, RightM, RightS;
 	
