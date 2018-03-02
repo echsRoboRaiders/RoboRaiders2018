@@ -8,6 +8,12 @@
 package org.usfirst.frc.team2676.robot;
 
 import edu.wpi.first.wpilibj.IterativeRobot;
+import edu.wpi.first.wpilibj.PWMTalonSRX;
+import edu.wpi.first.wpilibj.Solenoid;
+import edu.wpi.first.wpilibj.Talon;
+import edu.wpi.first.wpilibj.Timer;
+import edu.wpi.first.wpilibj.XboxController;
+import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
@@ -23,19 +29,42 @@ public class Robot extends IterativeRobot {
 	private static final String kCustomAuto = "My Auto";
 	private String m_autoSelected;
 	private SendableChooser<String> m_chooser = new SendableChooser<>();
-	Drive drive;
+	//Drive drive;
 	Controls controls;
-
+	DifferentialDrive dDrive;
+	Talon left;
+	Talon right;
+	PWMTalonSRX arm1;
+	XboxController driveStick;
+	XboxController operateStick;
+	Solenoid armSolenoid;
+	Timer timer;
+	
 	/**
 	 * This function is run when the robot is first started up and should be
 	 * used for any initialization code.
 	 */
 	@Override
 	public void robotInit() {
+		timer = new Timer();
+		timer.start();
+		left = new Talon(0);
+		right = new Talon(1);
+		
+		arm1 = new PWMTalonSRX(2);
+		arm1.set(0);
+		
+		dDrive = new DifferentialDrive(left, right);
+		
+		driveStick = new XboxController(0);
+		operateStick = new XboxController(1);
+		
+		armSolenoid = new Solenoid(1); // PCM ID of Solenoid 
+		
 		m_chooser.addDefault("Default Auto", kDefaultAuto);
 		m_chooser.addObject("My Auto", kCustomAuto);
 		SmartDashboard.putData("Auto choices", m_chooser);
-        drive = new Drive();
+        //drive = new Drive();
         controls = new Controls();
 	}
 
@@ -54,7 +83,7 @@ public class Robot extends IterativeRobot {
 	public void autonomousInit() {
 		m_autoSelected = m_chooser.getSelected();
 		// autoSelected = SmartDashboard.getString("Auto Selector",
-		// defaultAuto);
+		// defaultAuto);;
 		System.out.println("Auto selected: " + m_autoSelected);
 	}
 
@@ -69,8 +98,16 @@ public class Robot extends IterativeRobot {
 				// Put custom auto code here
 				break;
 			case kDefaultAuto:
+				if (timer.get()<3)
+				{
+				dDrive.arcadeDrive(0.5, 0);	
+				}
+				else
+				{
+					dDrive.arcadeDrive(0, 0);
+				}
 			default:
-				// Put default auto code here
+				
 				break;
 		}
 	}
@@ -80,7 +117,20 @@ public class Robot extends IterativeRobot {
 	 */
 	@Override
 	public void teleopPeriodic() {
-		drive.drive(controls.getDrivePowerL(), controls.getDrivePowerR());
+		//drive.drive(controls.getDrivePowerL());
+		//drive.drive(controls.getDrivePowerL(), controls.getDrivePowerR());
+		dDrive.arcadeDrive(-driveStick.getRawAxis(1), driveStick.getRawAxis(4));
+		
+		if(operateStick.getAButton()) {
+			arm1.set(1);
+
+		}
+		else if (operateStick.getBButton()) {
+		arm1.set(-1);
+		}
+		else {
+			arm1.set(0);
+		}
 	}
 
 	/**

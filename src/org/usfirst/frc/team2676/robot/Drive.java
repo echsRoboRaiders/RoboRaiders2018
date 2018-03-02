@@ -7,15 +7,15 @@ public class Drive {
 	
 	public Drive(){
 		LeftM = new WPI_TalonSRX(RobotMap.DriveLeftM);
-		LeftS = new WPI_TalonSRX(RobotMap.DriveLeftS);
-		LeftS.follow(LeftM);
-		RightM = new WPI_TalonSRX(RobotMap.DriveRightM);
-		RightS = new WPI_TalonSRX(RobotMap.DriveRightS);
-		RightS.follow(RightM);
+	//	LeftS = new WPI_TalonSRX(RobotMap.DriveLeftS);
+	//	LeftS.follow(LeftM);
+	//	RightM = new WPI_TalonSRX(RobotMap.DriveRightM);
+	//	RightS = new WPI_TalonSRX(RobotMap.DriveRightS);
+	//	RightS.follow(RightM);
 	}
 	
-	public void drive(double left, double right){
+	public void drive(double left){
 		LeftM.set(left);
-		RightM.set(-right);
+		//RightM.set(-right);
 		}
 	}
