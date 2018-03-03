@@ -11,8 +11,8 @@ public class RobotMap {
 	//public static final int DriveRightM = 1;
 	
 	//Solenoids Map
-	public static final int RightMotionSolenoid = 4;
-	public static final int LeftMotionSolenoid = 6;
-	public static final int RightFixedSolenoid = 5;
-	public static final int LeftFixedSolenoid = 7;
+	//public static final int RightMotionSolenoid = 4;
+	//public static final int LeftMotionSolenoid = 6;
+	//public static final int RightFixedSolenoid = 5;
+	//public static final int LeftFixedSolenoid = 7;
 }
