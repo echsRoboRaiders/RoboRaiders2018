@@ -61,8 +61,8 @@ public class Robot extends IterativeRobot {
 		
 		arm1 = new PWMTalonSRX(2);
 		arm1.set(0);
-		left.set(.6);
-		right.set(0.60);
+		left.set(.4);
+		right.set(0.40);
 		
 		dDrive = new DifferentialDrive(left, right);
 		
@@ -76,7 +76,9 @@ public class Robot extends IterativeRobot {
 		m_chooser.addDefault("Default Auto", kDefaultAuto);
 		m_chooser.addObject("My Auto", kCustomAuto);
 		SmartDashboard.putData("Auto choices", m_chooser);
-		CameraServer.getInstance().startAutomaticCapture();
+		CameraServer.getInstance().startAutomaticCapture(0);
+		CameraServer.getInstance().startAutomaticCapture(1);
+
         //drive = new Drive();
         controls = new Controls();
 	}
